@@ -157,7 +157,7 @@ if img:
         pass
     torchaudio.save("example.wav",waveforms.squeeze(1),sample_rate=22200)
     # torch.cuda.empty_cache()
-    playaud()
+    # playaud()
 
     # Load an audio fileaudio=pygame.mixerimport pygame
     # playsound("example.wav")

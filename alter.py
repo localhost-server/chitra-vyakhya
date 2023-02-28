@@ -148,32 +148,33 @@ def caption(img):
 #             st.session_state.get_aud = True
 
 # Download Button setup
-if st.button('⏬🔉'):
-    if st.session_state.get('function_enabled', True):
-        st.session_state.function_enabled = False
-    else:
-        st.session_state.function_enabled = True
-
-# if img:
-#     if os.path.exists("example.wav"):
-#         os.remove("example.wav")
+# if st.button('⏬🔉'):
+#     if st.session_state.get('function_enabled', True):
+#         st.session_state.function_enabled = False
 #     else:
-#         pass
-#     # Generate the caption for the image
-#     st.image(img, caption="")
-#     caption = caption(Image.open(img))
-#     # Display the uploaded image and generated caption
-#     st.write("Caption: " + caption,style={"color":"blue"})
+#         st.session_state.function_enabled = True
 
-#     # Running the TTS
-#     mel_output, mel_length, alignment = tacotron().encode_text(caption)
+if img:
+    if os.path.exists("example.wav"):
+        os.remove("example.wav")
+    else:
+        pass
+    # Generate the caption for the image
+    st.image(img, caption="")
+    caption = caption(Image.open(img))
+    # Display the uploaded image and generated caption
+    st.write("Caption: " + caption,style={"color":"blue"})
 
-#     # Running Vocoder (spectrogram-to-waveform)
-#     waveforms = hifigan().decode_batch(mel_output)
+    # Running the TTS
+    mel_output, mel_length, alignment = tacotron().encode_text(caption)
 
-#     # Save the waverform
-#     torchaudio.save("example.wav",waveforms.squeeze(1),sample_rate=22200)
-#     # torch.cuda.empty_cache()
+    # Running Vocoder (spectrogram-to-waveform)
+    waveforms = hifigan().decode_batch(mel_output)
+
+    # Save the waverform
+    torchaudio.save("example.wav",waveforms.squeeze(1),sample_rate=22200)
+    st.audio("example.wav")
+    # torch.cuda.empty_cache()
    
 #     # playsound("example.wav")
 #     # if st.session_state.get('get_audc', True):
